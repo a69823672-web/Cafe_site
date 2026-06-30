@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کافه پرواز</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family: Vazirmatn;
+  background:#111;
+  color:#ddd;
+}
+
+/* هدر */
+header{
+  text-align:center;
+  padding:20px;
+  background:#1a1a1a;
+  border-bottom:2px solid gold;
+}
+
+.logo{
+  width:100px;
+}
+
+/* عنوان‌ها */
+h1,h2{
+  color:gold;
+}
+
+/* منو */
+.menu{
+  padding:20px;
+}
+
+.item{
+  display:inline-block;
+  width:160px;
+  margin:10px;
+  background:#222;
+  border:1px solid #333;
+  border-radius:10px;
+  overflow:hidden;
+  text-align:center;
+  transition:0.3s;
+}
+
+.item:hover{
+  transform:scale(1.05);
+  border-color:gold;
+}
+
+.item img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+}
+
+.item h3{
+  padding:8px;
+  color:#ccc;
+}
+
+/* دکمه پنل */
+#adminBtn{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:gold;
+  color:#000;
+  border:none;
+  padding:10px 15px;
+  border-radius:50px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* پنل */
+#adminPanel{
+  display:none;
+  position:fixed;
+  top:20%;
+  left:50%;
+  transform:translateX(-50%);
+  background:#1a1a1a;
+  padding:20px;
+  border:1px solid gold;
+  z-index:9999;
+  width:250px;
+}
+
+input{
+  width:100%;
+  margin:5px 0;
+  padding:8px;
+  background:#111;
+  border:1px solid #444;
+  color:#fff;
+}
+
+button{
+  background:gold;
+  border:none;
+  padding:8px;
+  width:100%;
+  cursor:pointer;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="logo.jpg" class="logo">
+<h1>کافه پرواز</h1>
+<p>شرکت هوانوردی عقاب آسمان شمال</p>
+</header>
+
+<section class="menu">
+
+<h2>☕ نوشیدنی بر پایه قهوه</h2>
+
+<div class="item"><img src="images/اسپرسو.jpg"><h3>اسپرسو</h3></div>
+<div class="item"><img src="images/لته.jpg"><h3>لته</h3></div>
+<div class="item"><img src="images/آمریکانو.jpg"><h3>آمریکانو</h3></div>
+<div class="item"><img src="images/کاپوچینو.jpg"><h3>کاپوچینو</h3></div>
+<div class="item"><img src="images/لته کارامل.jpg"><h3>لته کارامل</h3></div>
+<div class="item"><img src="images/اسپرسو ماکیاتو.jpg"><h3>اسپرسو ماکیاتو</h3></div>
+<div class="item"><img src="images/کارامل ماکیاتو.jpg"><h3>کارامل ماکیاتو</h3></div>
+<div class="item"><img src="images/موکا.jpg"><h3>موکا</h3></div>
+<div class="item"><img src="images/نسکافه.jpg"><h3>نسکافه</h3></div>
+
+<h2>🧊 نوشیدنی سرد</h2>
+
+<div class="item"><img src="images/آیس لته.jpg"><h3>آیس لته</h3></div>
+<div class="item"><img src="images/آیس آمریکانو.jpg"><h3>آیس آمریکانو</h3></div>
+<div class="item"><img src="images/آیس لته کارامل.jpg"><h3>آیس لته کارامل</h3></div>
+<div class="item"><img src="images/آیس موکا.jpg"><h3>آیس موکا</h3></div>
+
+<h2>🍳 صبحانه</h2>
+
+<div class="item"><img src="images/نیمرو.jpg"><h3>نیمرو</h3></div>
+<div class="item"><img src="images/املت.jpg"><h3>املت</h3></div>
+
+</section>
+
+<!-- دکمه پنل -->
+<button id="adminBtn" onclick="openPanel()">⚙️</button>
+
+<!-- پنل ادمین -->
+<div id="adminPanel">
+
+<h3 style="color:gold;text-align:center;">پنل مدیریت</h3>
+
+<input type="password" id="pass" placeholder="رمز">
+<button onclick="login()">ورود</button>
+
+<div id="controls" style="display:none;">
+  <input id="newPrice" placeholder="قیمت (اختیاری)">
+  <input id="newImg" placeholder="لینک عکس جدید">
+  <button onclick="save()">ذخیره</button>
+</div>
+
+</div>
+
+<script>
+function openPanel(){
+  document.getElementById("adminPanel").style.display="block";
+}
+
+function login(){
+  if(document.getElementById("pass").value==="4030"){
+    document.getElementById("controls").style.display="block";
+  }else{
+    alert("رمز اشتباهه");
+  }
+}
+
+function save(){
+  localStorage.setItem("price",document.getElementById("newPrice").value);
+  localStorage.setItem("img",document.getElementById("newImg").value);
+  alert("ذخیره شد");
+}
+
+window.onload=function(){
+  const img=localStorage.getItem("img");
+  if(img){
+    document.querySelectorAll(".item img")[0].src=img;
+  }
+}
+</script>
+
+</body>
+</html>
