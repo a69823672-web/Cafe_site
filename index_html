@@ -5,118 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>کافه پرواز</title>
 
+<link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
-
-<style>
-body{
-  margin:0;
-  font-family: Vazirmatn;
-  background:#111;
-  color:#ddd;
-}
-
-/* هدر */
-header{
-  text-align:center;
-  padding:20px;
-  background:#1a1a1a;
-  border-bottom:2px solid gold;
-}
-
-.logo{
-  width:100px;
-}
-
-/* عنوان‌ها */
-h1,h2{
-  color:gold;
-}
-
-/* منو */
-.menu{
-  padding:20px;
-}
-
-.item{
-  display:inline-block;
-  width:160px;
-  margin:10px;
-  background:#222;
-  border:1px solid #333;
-  border-radius:10px;
-  overflow:hidden;
-  text-align:center;
-  transition:0.3s;
-}
-
-.item:hover{
-  transform:scale(1.05);
-  border-color:gold;
-}
-
-.item img{
-  width:100%;
-  height:120px;
-  object-fit:cover;
-}
-
-.item h3{
-  padding:8px;
-  color:#ccc;
-}
-
-/* دکمه پنل */
-#adminBtn{
-  position:fixed;
-  bottom:15px;
-  right:15px;
-  background:gold;
-  color:#000;
-  border:none;
-  padding:10px 15px;
-  border-radius:50px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* پنل */
-#adminPanel{
-  display:none;
-  position:fixed;
-  top:20%;
-  left:50%;
-  transform:translateX(-50%);
-  background:#1a1a1a;
-  padding:20px;
-  border:1px solid gold;
-  z-index:9999;
-  width:250px;
-}
-
-input{
-  width:100%;
-  margin:5px 0;
-  padding:8px;
-  background:#111;
-  border:1px solid #444;
-  color:#fff;
-}
-
-button{
-  background:gold;
-  border:none;
-  padding:8px;
-  width:100%;
-  cursor:pointer;
-  font-weight:bold;
-}
-</style>
 </head>
 
 <body>
 
 <header>
-<img src="logo.jpg" class="logo">
+<img src="logo.jpg" class="logo" alt="logo">
 <h1>کافه پرواز</h1>
 <p>شرکت هوانوردی عقاب آسمان شمال</p>
 </header>
@@ -149,7 +45,7 @@ button{
 
 </section>
 
-<!-- دکمه پنل -->
+<!-- دکمه مخفی پنل -->
 <button id="adminBtn" onclick="openPanel()">⚙️</button>
 
 <!-- پنل ادمین -->
@@ -157,7 +53,8 @@ button{
 
 <h3 style="color:gold;text-align:center;">پنل مدیریت</h3>
 
-<input type="password" id="pass" placeholder="رمز">
+<input type="password" id="pass" placeholder="رمز ورود">
+
 <button onclick="login()">ورود</button>
 
 <div id="controls" style="display:none;">
@@ -170,29 +67,39 @@ button{
 
 <script>
 function openPanel(){
-  document.getElementById("adminPanel").style.display="block";
+  document.getElementById("adminPanel").style.display = "block";
 }
 
 function login(){
-  if(document.getElementById("pass").value==="4030"){
-    document.getElementById("controls").style.display="block";
-  }else{
-    alert("رمز اشتباهه");
+  const pass = document.getElementById("pass").value;
+
+  if(pass === "4030"){
+    document.getElementById("controls").style.display = "block";
+  } else {
+    alert("رمز اشتباه ❌");
   }
 }
 
 function save(){
-  localStorage.setItem("price",document.getElementById("newPrice").value);
-  localStorage.setItem("img",document.getElementById("newImg").value);
-  alert("ذخیره شد");
+  const price = document.getElementById("newPrice").value;
+  const img = document.getElementById("newImg").value;
+
+  if(price) localStorage.setItem("price", price);
+  if(img) localStorage.setItem("img", img);
+
+  alert("ذخیره شد ✅");
 }
 
-window.onload=function(){
-  const img=localStorage.getItem("img");
+window.onload = function(){
+  const img = localStorage.getItem("img");
+
   if(img){
-    document.querySelectorAll(".item img")[0].src=img;
+    const images = document.querySelectorAll(".item img");
+    if(images.length > 0){
+      images[0].src = img;
+    }
   }
-}
+};
 </script>
 
 </body>
